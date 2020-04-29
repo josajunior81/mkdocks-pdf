@@ -1,0 +1,22 @@
+FROM alpine:3.11
+
+RUN apk --update --upgrade --no-cache add git bash curl unzip fontconfig ttf-dejavu ttf-font-awesome python3 python3-dev \
+    musl-dev g++ make gcc jpeg-dev zlib-dev libffi libffi-dev cairo-dev pango-dev gdk-pixbuf-dev
+
+COPY Roboto.zip Roboto.zip
+COPY Roboto_Mono.zip Roboto_Mono.zip
+
+RUN mkdir -p ~/.fonts && mkdir -p ~/.fonts/Roboto && unzip Roboto.zip -d ~/.fonts/Roboto \
+    && mkdir -p ~/.fonts/RobotoMono && unzip Roboto_Mono.zip -d ~/.fonts/RobotoMono \
+    && fc-cache -fv 
+
+RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py \   
+    && python3 get-pip.py \
+    && pip install font-roboto \
+    && pip install mkdocs==1.1 \
+    && pip install mkdocs-material \
+    && pip install pygments \
+    && pip install pymdown-extensions \
+    && pip install markdown \
+    && pip install mkdocs-pdf-export-plugin==0.5.6 \
+    && pip install mkdocs-git-revision-date-plugin

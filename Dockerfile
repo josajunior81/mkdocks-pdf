@@ -13,7 +13,7 @@ RUN export LC_ALL=C.UTF-8 \
   && pip3 uninstall --yes cairocffi \
   && pip3 install cairocffi==1.0.1 \
   && pip3 install font-roboto \
-  && pip3 install mkdocs \
+  && pip3 install mkdocs==1.1 \
   && pip3 install mkdocs-material \
   && pip3 install pygments \
   && pip3 install pymdown-extensions \
